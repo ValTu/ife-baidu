@@ -22,18 +22,38 @@
 		var oBtn = document.getElementById("button");
 		var oSpan = document.getElementById("aqi-display");
 
-		//检测input 输入的值，去除非数字，/[^\d]/匹配非数字，最大可输入三位数
-		oInput.onkeyup = function () {
+		var handle = function () {
+			oSpan.innerHTML = oInput.value;
+		};
+
+		//检测input 输入的值
+		oInput.onkeyup = function (event) {
+			event = event || window.event;
+			//去除非数字，/[^\d]/匹配非数字
 			this.value = this.value.replace(/[^\d]/, "");
-			if(oInput.value.length > 3) {
+
+			//输入范围0-999
+			if(parseInt(this.value) > 999) {
 				this.value = this.value.substr(0, 3);
-				alert("最大只能输入三位数字！");
+				alert("输入范围为0-999！");
+			}
+			if(event.keyCode == 13) {
+				handle();
+			}
+
+			//去除数字之前的0
+			for(var i = 0; i < this.value.length; i++) {
+				// var Value = null;
+				if(this.value.charAt(i) != 0) {
+					this.value = this.value.substr(i, this.value.length);
+					return;
+				}
 			}
 		};
 
 		//button点击事件
 		oBtn.onclick = function () {
-			oSpan.innerHTML = oInput.value;
+			handle();
 		};
 
 	})();
