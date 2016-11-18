@@ -29,6 +29,7 @@
 		//检测input 输入的值
 		oInput.onkeyup = function (event) {
 			event = event || window.event;
+
 			//去除非数字，/[^\d]/匹配非数字
 			this.value = this.value.replace(/[^\d]/, "");
 
@@ -37,6 +38,8 @@
 				this.value = this.value.substr(0, 3);
 				alert("输入范围为0-999！");
 			}
+			
+			//点击回车显示
 			if(event.keyCode == 13) {
 				handle();
 			}
