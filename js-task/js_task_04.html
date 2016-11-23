@@ -23,9 +23,8 @@
 		 * 从用户输入中获取数据，向aqiData中增加一条数据
 		 * 然后渲染aqi-list列表，增加新增的数据
 		 */
-		function addAqiData() {
-			// 验证表单输入
-
+		// 验证表单输入
+		function testAqiData() {
 			cityInput.onkeyup = function () {
 				this.value = this.value.replace(/[^A-Za-z\u4E00-\u9FA5]/, "");
 			};
@@ -39,7 +38,9 @@
 					}
 				}
 			};
-			aqiData[cityInput.value] = valInput.value;
+		};
+		function addAqiData() {
+			cityInput.value == "" || valInput.value == "" ? alert("值不能为空！请输入城市名称或空气质量指数") : aqiData[cityInput.value] = valInput.value;
 		};
 
 		/**
@@ -58,8 +59,8 @@
 		 * 获取用户输入，更新数据，并进行页面呈现的更新
 		 */
 		function addBtnHandle() {
-		    addAqiData();
-		    renderAqiList();
+		  addAqiData();
+		  renderAqiList();
 		}
 
 		/**
@@ -72,11 +73,12 @@
 		};
 
 		function init() {
+			testAqiData();
 			// 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
 			oBtn.addEventListener ? oBtn.addEventListener("click", addBtnHandle, false) : oBtn.attachEvent("onclick", addEventListener);
 
 			// 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-			
+
 		};
 
 		init();
